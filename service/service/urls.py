@@ -23,8 +23,8 @@ from FilesApp.views import FileViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/upload/', FileViewSet.as_view({'post': 'create'})),
-    path('api/v1/files/', FileViewSet.as_view({'get': 'list'})),
+    path('api/upload/', FileViewSet.as_view({'post': 'create'})),
+    path('api/files/', FileViewSet.as_view({'get': 'list'})),
 ]
 
 
