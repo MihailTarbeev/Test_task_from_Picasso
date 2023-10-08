@@ -2,4 +2,3 @@ Django==4.2.5
 djangorestframework==3.14.0
 celery[redis]==5.2.7
 flower==1.2.0
-Pillow-PIL
