@@ -6,12 +6,6 @@ services:
       - "8000:8000"
     volumes:
       - ./service:/service
-    environment:
-      - DB_HOST=database
-      - DB_NAME=dbname
-      - DB_USER=dbuser
-      - DB_PASS=pass
-
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
 
@@ -19,11 +13,11 @@ services:
       - database
 
   database:
-    image: postgres:14.6-alpine
+    image: nouchka/sqlite3:latest
+    volumes:
+      - ./data/db:/root/db
     environment:
-      - POSTGRES_DB=dbname
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=pass
+      - SQLITE3_DB=db.sqlite3
 
   redis:
     image: redis:7.0.5-alpine
@@ -41,3 +35,18 @@ services:
       - redis
     depends_on:
       - redis
+
+  flower:
+    build:
+      context: .
+    hostname: flower
+    entrypoint: celery
+    command: -A celery_app.app flower
+    volumes:
+      - ./service:/service
+    links:
+      - redis
+    depends_on:
+      - redis
+    ports:
+      - "5555:5555"

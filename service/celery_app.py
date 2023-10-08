@@ -1,8 +1,8 @@
 import os
 import time
-
 from celery import Celery
 from django.conf import settings
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'service.settings')
 
@@ -17,3 +17,4 @@ app.autodiscover_tasks()
 def debug_task():
     time.sleep(10)
     print('Hellow from debug_task')
+

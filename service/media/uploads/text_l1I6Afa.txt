@@ -1,0 +1,59 @@
+CELERY_APP 
+
+from pathlib import Path
+from django.core.files import File
+from FilesApp.models import File as FileModel
+from django.core.files.storage import FileSystemStorage
+
+# @app.task()
+# def upload_file(path, file_name):
+#     print('Uploading image...')
+#
+#     time.sleep(10)
+#
+#     storage = FileSystemStorage()
+#
+#     path_object = Path(path)
+#
+#     with path_object.open(mode='rb') as f:
+#         file = File(f, name=path_object.name)
+#
+#         instance = FileModel(image=file, processed=True)
+#
+#         instance.save()
+#
+#     storage.delete(file_name)
+#
+#     print('Uploaded!')
+
+
+SERIALIZER.PY
+
+# from django.core.files.storage import FileSystemStorage
+# from celery_app import upload_file
+
+    # def create(self, validated_data):
+    #     file = self.context['file']
+    #     storage = FileSystemStorage()
+    #
+    #     storage.save(file.name, File(file))
+    #
+    #     return upload_file.delay(path=storage.path(file.name), file_name=file.name)
+    
+    
+VIEWS.PY
+
+# from django.http import HttpResponse
+
+
+    # def create(self, request, *args, **kwargs):
+    #     file = self.request.FILES['file']
+    #     serializer = FileSerializer(
+    #         data=request.data,
+    #         context={
+    #             'file': file
+    #         }
+    #     )
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return HttpResponse('Upload Started...')
